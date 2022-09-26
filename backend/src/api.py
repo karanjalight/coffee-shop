@@ -31,7 +31,7 @@ def helloworld():
     print(test)
     return f'hello world!'
 
-@app.route('/drink', methods=['GET'])
+@app.route('/drinks', methods=['GET'])
 def getdrinks():
     try:
         
@@ -60,16 +60,19 @@ def getdrinks():
 #==================DONE========================1
 
 @app.route('/drinks-detail', methods=['GET'])
-@requires_auth("get:drinks-detail")
-def drinks(jwt):
+#@requires_auth("get:drinks-detail")
+def drinks():
     try:
         drinks = [drink.long() for drink in Drink.query.all()]
+        print(drinks)
     except:
         abort(404)
     return jsonify({
         'success':  True,
         'drinks': drinks,
     })
+
+    #I will deploy this app soon
 
 '''
 @TODO implement endpoint
